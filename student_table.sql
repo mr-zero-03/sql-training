@@ -2,10 +2,12 @@
 
 CREATE TABLE student (
   id INT,
-  name VARCHAR(30),
+  identification_document INT NOT NULL,
+  name VARCHAR(30) NOT NULL,
   grade TINYINT(2) UNSIGNED,
 
-  PRIMARY KEY(id)
+  PRIMARY KEY(id),
+  UNIQUE( identification_document )
 );
 DESCRIBE student;
 
