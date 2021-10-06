@@ -5,6 +5,7 @@ CREATE TABLE student (
   identification_document INT NOT NULL,
   name VARCHAR(30) NOT NULL,
   grade TINYINT(2) UNSIGNED,
+  favorite_subject VARCHAR(30) DEFAULT 'No favorite',
 
   PRIMARY KEY(id),
   UNIQUE( identification_document )
