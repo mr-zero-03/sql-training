@@ -11,3 +11,6 @@ DESCRIBE student;
 
 ALTER TABLE student ADD birthday_date DATE;
 DESCRIBE student;
+
+ALTER TABLE student ADD sex CHAR(1);
+DESCRIBE student;
