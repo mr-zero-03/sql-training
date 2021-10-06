@@ -1,7 +1,7 @@
 -- To create the student table, and alterate it to add a new field
 
 CREATE TABLE student (
-  id INT,
+  id INT AUTO_INCREMENT,
   identification_document INT NOT NULL,
   name VARCHAR(30) NOT NULL,
   grade TINYINT(2) UNSIGNED,
