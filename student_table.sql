@@ -1,5 +1,6 @@
 -- To create the student table, and alterate it to add a new field
 
+\! echo '-- Creating the table:';
 CREATE TABLE student (
   id INT AUTO_INCREMENT,
   identification_document INT NOT NULL,
@@ -12,8 +13,10 @@ CREATE TABLE student (
 );
 DESCRIBE student;
 
+\! echo '-- Adding the birthday_date field:';
 ALTER TABLE student ADD birthday_date DATE;
 DESCRIBE student;
 
+\! echo '-- Adding the sex field:';
 ALTER TABLE student ADD sex CHAR(1);
 DESCRIBE student;
