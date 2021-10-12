@@ -20,3 +20,11 @@ DESCRIBE student;
 \! echo '-- Adding the sex field:';
 ALTER TABLE student ADD sex CHAR(1);
 DESCRIBE student;
+
+\! echo '-- Adding the age field:';
+ALTER TABLE student ADD age TINYINT(3);
+DESCRIBE student;
+
+\! echo '-- Dropping the age field:';
+ALTER TABLE student DROP COLUMN age;
+DESCRIBE student;
