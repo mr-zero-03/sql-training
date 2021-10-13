@@ -15,8 +15,22 @@ FROM employee
 LEFT JOIN branch
 ON employee.id = branch.manager_id;
 
+\! echo "LEFT EXCLUDING JOIN: Find all the employees and those who are managers will not appear"
+SELECT employee.id AS 'Employee ID', employee.first_name, employee.last_name, branch.id AS 'Branch ID', branch.name
+FROM employee
+LEFT JOIN branch
+ON employee.id = branch.manager_id
+WHERE branch.manager_id IS NULL;
+
 \! echo "RIGHT JOIN: Find all the branches and those who have managers will have the manager id and his name"
 SELECT branch.id AS 'Branch ID', branch.name, employee.id AS 'Employee ID', employee.first_name, employee.last_name
 FROM employee
 RIGHT JOIN branch
 ON employee.id = branch.manager_id;
+
+\! echo "RIGHT EXCLUDING JOIN: Find all the branches and those who does not have manager will appear"
+SELECT branch.id AS 'Branch ID', branch.name, employee.id AS 'Employee ID', employee.first_name, employee.last_name
+FROM employee
+RIGHT JOIN branch
+ON employee.id = branch.manager_id
+WHERE employee.id IS NULL;
