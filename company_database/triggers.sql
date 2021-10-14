@@ -1,5 +1,10 @@
-CREATE TABLE IF NOT EXISTS trigger_test (
-  message VARCHAR(100)
+CREATE TABLE IF NOT EXISTS employee_history (
+  id INT,
+  name VARCHAR(40),
+  status VARCHAR(15),
+  last_modification DATETIME,
+
+  PRIMARY KEY ( id )
 );
 
 DELIMITER $$
@@ -8,7 +13,7 @@ CREATE
   TRIGGER on_insert_employee AFTER INSERT
   ON employee
   FOR EACH ROW BEGIN
-    INSERT INTO trigger_test VALUES( 'Added a new employee' );
+    INSERT IGNORE INTO employee_history VALUES( NEW.id, NEW.first_name, 'Active', now() );
   END$$
 DELIMITER ;
 
@@ -20,4 +25,4 @@ INSERT INTO employee VALUES( 110, 'Kevin', 'Malone', '1978-02-19', 'M', 69000, 1
 SELECT * FROM employee WHERE id = 110;
 DELETE FROM employee WHERE id = 110;
 
-SELECT * FROM trigger_test;
+SELECT * FROM employee_history;
