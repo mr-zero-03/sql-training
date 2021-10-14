@@ -15,15 +15,11 @@ CREATE
   ON employee
   FOR EACH ROW BEGIN
     IF NOT EXISTS ( SELECT 1=1 FROM employee_history WHERE employee_history.id = NEW.id  ) THEN
-    BEGIN
       INSERT INTO employee_history( id, name, status, last_modification )
       VALUES( NEW.id, NEW.first_name, 'Active', now() );
-    END;
     ELSE
-    BEGIN
       UPDATE employee_history SET status = 'Active', last_modification = now() WHERE id = NEW.id;
-    END;
-  END IF;
+    END IF;
   END$$
 DELIMITER ;
 
