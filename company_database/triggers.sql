@@ -1,6 +1,7 @@
 CREATE TABLE IF NOT EXISTS employee_history (
   id INT,
   name VARCHAR(40),
+  sex VARCHAR(15),
   status VARCHAR(15),
   last_modification DATETIME,
 
@@ -15,7 +16,8 @@ CREATE
   FOR EACH ROW BEGIN
     IF NOT EXISTS ( SELECT 1=1 FROM employee_history WHERE employee_history.id = NEW.id  ) THEN
     BEGIN
-      INSERT INTO employee_history VALUES( NEW.id, NEW.first_name, 'Active', now() );
+      INSERT INTO employee_history( id, name, status, last_modification )
+      VALUES( NEW.id, NEW.first_name, 'Active', now() );
     END;
     ELSE
     BEGIN
@@ -25,10 +27,27 @@ CREATE
   END$$
 DELIMITER ;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS set_employee_sex$$
+CREATE
+  TRIGGER set_employee_sex AFTER INSERT
+  ON employee
+  FOR EACH ROW BEGIN
+    IF ( NEW.sex = 'M' ) THEN
+      UPDATE employee_history SET sex = 'Male' WHERE NEW.id = employee_history.id;
+    ELSEIF ( NEW.sex = 'F' ) THEN
+      UPDATE employee_history SET sex = 'Female' WHERE NEW.id = employee_history.id;
+    ELSE
+      UPDATE employee_history SET sex = 'Undefined' WHERE NEW.id = employee_history.id;
+    END IF;
+  END$$
+DELIMITER ;
+
 INSERT INTO employee VALUES
   ( 109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3 ),
-  ( 110, 'Kevin', 'Malone', '1978-02-19', 'M', 69000, 106, 3 );
-SELECT * FROM employee WHERE id IN( 109, 110 );
+  ( 110, 'Kevin', 'Malone', '1978-02-19', NULL, 69000, 106, 3 ),
+  ( 111, 'Pam', 'Beesly', '1988-02-19', 'F', 69000, 106, 3 );
+SELECT * FROM employee WHERE id IN( 109, 110, 111 );
 SELECT * FROM employee_history;
 
 
@@ -45,5 +64,5 @@ CREATE
   END$$
 DELIMITER ;
 
-DELETE FROM employee WHERE id IN( 109, 110 );
+DELETE FROM employee WHERE id IN( 109, 110, 111 );
 SELECT * FROM employee_history;
