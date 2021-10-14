@@ -25,12 +25,10 @@ CREATE
   END$$
 DELIMITER ;
 
-INSERT INTO employee VALUES( 109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3 );
-SELECT * FROM employee WHERE id = 109;
-
-INSERT INTO employee VALUES( 110, 'Kevin', 'Malone', '1978-02-19', 'M', 69000, 106, 3 );
-SELECT * FROM employee WHERE id = 110;
-
+INSERT INTO employee VALUES
+  ( 109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3 ),
+  ( 110, 'Kevin', 'Malone', '1978-02-19', 'M', 69000, 106, 3 );
+SELECT * FROM employee WHERE id IN( 109, 110 );
 SELECT * FROM employee_history;
 
 
@@ -47,7 +45,5 @@ CREATE
   END$$
 DELIMITER ;
 
-DELETE FROM employee WHERE id = 109;
-DELETE FROM employee WHERE id = 110;
-
+DELETE FROM employee WHERE id IN( 109, 110 );
 SELECT * FROM employee_history;
