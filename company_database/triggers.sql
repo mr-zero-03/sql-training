@@ -13,7 +13,15 @@ CREATE
   TRIGGER on_insert_employee AFTER INSERT
   ON employee
   FOR EACH ROW BEGIN
-    INSERT IGNORE INTO employee_history VALUES( NEW.id, NEW.first_name, 'Active', now() );
+    IF NOT EXISTS ( SELECT 1=1 FROM employee_history WHERE employee_history.id = NEW.id  ) THEN
+    BEGIN
+      INSERT INTO employee_history VALUES( NEW.id, NEW.first_name, 'Active', now() );
+    END;
+    ELSE
+    BEGIN
+      UPDATE employee_history SET last_modification = now() WHERE id = NEW.id;
+    END;
+  END IF;
   END$$
 DELIMITER ;
 
