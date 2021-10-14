@@ -19,7 +19,7 @@ CREATE
     END;
     ELSE
     BEGIN
-      UPDATE employee_history SET last_modification = now() WHERE id = NEW.id;
+      UPDATE employee_history SET status = 'Active', last_modification = now() WHERE id = NEW.id;
     END;
   END IF;
   END$$
@@ -27,10 +27,27 @@ DELIMITER ;
 
 INSERT INTO employee VALUES( 109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3 );
 SELECT * FROM employee WHERE id = 109;
-DELETE FROM employee WHERE id = 109;
 
 INSERT INTO employee VALUES( 110, 'Kevin', 'Malone', '1978-02-19', 'M', 69000, 106, 3 );
 SELECT * FROM employee WHERE id = 110;
+
+SELECT * FROM employee_history;
+
+
+\! read -p "I am going to delete the employees with ID 109 and 110" wait
+
+DELIMITER $$
+DROP TRIGGER IF EXISTS on_delete_employee$$
+CREATE
+  TRIGGER on_delete_employee BEFORE DELETE
+  ON employee
+  FOR EACH ROW BEGIN
+    UPDATE employee_history SET status = 'Deleted', last_modification = now()
+    WHERE id = OLD.id;
+  END$$
+DELIMITER ;
+
+DELETE FROM employee WHERE id = 109;
 DELETE FROM employee WHERE id = 110;
 
 SELECT * FROM employee_history;
