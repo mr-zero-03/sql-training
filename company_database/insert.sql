@@ -47,7 +47,7 @@ INSERT INTO client VALUES
 --
 -- Works With records
 DELETE FROM works_with;
-INSERT INTO works_with VALUES
+INSERT INTO works_with( employee_id, client_id, total_sales ) VALUES
   ( 105, 400, 55000 ),
   ( 102, 401, 267000 ),
   ( 108, 402, 22500 ),
@@ -61,7 +61,7 @@ INSERT INTO works_with VALUES
 --
 -- Branch Supplier records
 DELETE FROM branch_supplier;
-INSERT INTO branch_supplier VALUES
+INSERT INTO branch_supplier( branch_id, supplier_name, supply_type ) VALUES
   ( 2, 'Hammer Mill', 'Paper' ),
   ( 2, 'Uni-ball', 'Writing Utensils' ),
   ( 3, 'Patriot Paper', 'Paper' ),

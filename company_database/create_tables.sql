@@ -56,11 +56,13 @@ CREATE TABLE client (
 -- Work With table
 DROP TABLE IF EXISTS works_with;
 CREATE TABLE works_with (
-  employee_id INT,
-  client_id INT,
+  id INT AUTO_INCREMENT,
+  employee_id INT NOT NULL,
+  client_id INT NOT NULL,
   total_sales INT,
 
-  PRIMARY KEY( employee_id, client_id ),
+  PRIMARY KEY( id ),
+  CONSTRAINT un_works_with UNIQUE( employee_id, client_id ),
   FOREIGN KEY( employee_id ) REFERENCES employee( id ) ON DELETE CASCADE,
   FOREIGN KEY( client_id ) REFERENCES client( id ) ON DELETE CASCADE
 );
@@ -69,11 +71,13 @@ CREATE TABLE works_with (
 -- Branch Supplier table
 DROP TABLE IF EXISTS branch_supplier;
 CREATE TABLE branch_supplier (
-  branch_id INT,
-  supplier_name VARCHAR(40),
+  id INT AUTO_INCREMENT,
+  branch_id INT NOT NULL,
+  supplier_name VARCHAR(40) NOT NULL,
   supply_type VARCHAR(40),
 
-  PRIMARY KEY( branch_id, supplier_name ),
+  PRIMARY KEY( id ),
+  CONSTRAINT branch_supplier UNIQUE( branch_id, supplier_name ),
   FOREIGN KEY( branch_id ) REFERENCES branch( id ) ON DELETE CASCADE
 );
 
