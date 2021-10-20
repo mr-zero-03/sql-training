@@ -104,3 +104,18 @@ CREATE TABLE subject_groups (
 );
 
 SET foreign_key_checks = 1;
+
+--
+-- Student_notes table
+DROP TABLE IF EXISTS student_notes;
+CREATE TABLE student_notes (
+  id INT AUTO_INCREMENT,
+  student_id INT NOT NULL,
+  topic_id INT NOT NULL,
+  note FLOAT,
+
+  PRIMARY KEY( id ),
+  CONSTRAINT student_topic UNIQUE( topic_id, student_id ),
+  FOREIGN KEY( student_id ) REFERENCES students( id ),
+  FOREIGN KEY( topic_id ) REFERENCES subject_topics( id )
+);

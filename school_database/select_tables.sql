@@ -14,3 +14,5 @@ SELECT * FROM teachers;
 SELECT * FROM students;
 \! echo "Subject-Groups"
 SELECT * FROM subject_groups;
+\! echo "Student_notes"
+SELECT * FROM student_notes;
