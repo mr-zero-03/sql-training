@@ -102,3 +102,24 @@ FROM groups
 JOIN teachers
 ON groups.director_id = teachers.id
 WHERE groups.director_id = @director_id;
+
+
+\! echo "Find the students with note > 3.5, but < 5.0 and order it to the less to the greatest note"
+SET @greaterThanNote = 3.5; SET @smallerThanNote = 5.0;
+SELECT students.name, subjects.name AS subject, subject_topics.topic, student_notes.note
+FROM student_notes
+INNER JOIN students ON student_notes.student_id = students.id
+INNER JOIN subject_topics ON student_notes.topic_id = subject_topics.id
+INNER JOIN subjects ON subject_topics.subject_id = subjects.id
+WHERE note > @greaterThanNote AND note < @smallerThanNote
+ORDER BY note;
+
+
+\! echo "Find the notes obtained by the students in a topic (Topic ID = 10)"
+SET @topic_id = 10;
+SELECT students.name, subjects.name AS subject, subject_topics.topic, student_notes.note
+FROM student_notes
+INNER JOIN students ON student_notes.student_id = students.id
+INNER JOIN subject_topics ON student_notes.topic_id = subject_topics.id
+INNER JOIN subjects ON subject_topics.subject_id = subjects.id
+WHERE subject_topics.id = @topic_id;
