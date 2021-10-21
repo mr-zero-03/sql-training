@@ -34,3 +34,10 @@ FROM employee
 RIGHT JOIN branch
 ON employee.id = branch.manager_id
 WHERE employee.id IS NULL;
+
+\! echo "SELF JOIN: Comparing the employees with the same supervisor in the employee table"
+SELECT employee1.supervisor_id, employee1.id, employee1.first_name AS employee1, employee2.id, employee2.first_name AS employee2
+FROM employee employee1, employee employee2
+WHERE employee1.id <> employee2.id
+AND employee1.supervisor_id = employee2.supervisor_id
+ORDER BY employee1.supervisor_id, employee1.id, employee2.id;
