@@ -24,32 +24,32 @@ INSERT INTO subjects( name, grade_id, coordinator_id ) VALUES
 
 
 DELETE FROM subject_topics;
-INSERT INTO subject_topics( subject_id, topic_number, topic ) VALUES
+INSERT INTO subject_topics( subject_id, topic_number, topic, semester ) VALUES
   -- 10 grade
-  ( 1, 1, 'Linear Equations' ),  -- Algebra
-  ( 1, 2, 'Inequalities' ),
-  ( 1, 3, 'Functions' ),
+  ( 1, 1, 'Linear Equations', 1 ),  -- Algebra
+  ( 1, 2, 'Inequalities', 2 ),
+  ( 1, 3, 'Functions', 3 ),
 
-  ( 2, 1, 'History of the country' ),  -- Social Sciences
-  ( 2, 2, 'Social Movements' ),
-  ( 2, 3, 'Human Rights' ),
+  ( 2, 1, 'History of the country', 1 ),  -- Social Sciences
+  ( 2, 2, 'Social Movements', 2 ),
+  ( 2, 3, 'Human Rights', 3 ),
 
-  ( 3, 1, 'Sine(sin) and Cosine(cos)' ),  -- Trigonometry
-  ( 3, 2, 'Tangent(tan) and Cotangent(cot)' ),
-  ( 3, 3, 'Secant(sec) and Cosecant(csc)' ),
+  ( 3, 1, 'Sine(sin) and Cosine(cos)', 1 ),  -- Trigonometry
+  ( 3, 2, 'Tangent(tan) and Cotangent(cot)', 2 ),
+  ( 3, 3, 'Secant(sec) and Cosecant(csc)', 3 ),
 
   -- 11 grade
-  ( 4, 1, 'Limits and Continuity' ),  -- Calculus
-  ( 4, 2, 'Integrals' ),
-  ( 4, 3, 'Series' ),
+  ( 4, 1, 'Limits and Continuity', 1 ),  -- Calculus
+  ( 4, 2, 'Integrals', 2 ),
+  ( 4, 3, 'Series', 3 ),
 
-  ( 5, 1, 'Spaces and Vectors' ),  -- Linear Algebra
-  ( 5, 2, 'Matrix Transformations' ),
-  ( 5, 3, 'Bases' ),
+  ( 5, 1, 'Spaces and Vectors', 1 ),  -- Linear Algebra
+  ( 5, 2, 'Matrix Transformations', 2 ),
+  ( 5, 3, 'Bases', 3 ),
 
-  ( 6, 1, 'Existentialism' ),  -- Philosphy
-  ( 6, 2, 'Stoicism' ),
-  ( 6, 3, 'Logic and Argumentation' );
+  ( 6, 1, 'Existentialism', 1 ),  -- Philosphy
+  ( 6, 2, 'Stoicism', 2 ),
+  ( 6, 3, 'Logic and Argumentation', 3 );
 
 
 DELETE FROM groups;

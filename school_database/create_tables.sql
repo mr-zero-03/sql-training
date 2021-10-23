@@ -47,6 +47,7 @@ CREATE TABLE subject_topics (
   subject_id INT NOT NULL,
   topic_number INT NOT NULL,
   topic VARCHAR( 50 ),
+  semester INT NOT NULL,
 
   PRIMARY KEY( id ),
   CONSTRAINT subject_topics UNIQUE( subject_id, topic_number ),
