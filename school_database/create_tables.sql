@@ -124,7 +124,7 @@ CREATE TABLE student_notes (
 --
 -- Student_grade_point_average view
 CREATE OR REPLACE VIEW student_grade_point_average AS
-  SELECT groups.name AS groups, student_notes.student_id, students.name, students.surname, subjects.name AS subject_name, ROUND( SUM( note ) / ( COUNT( subject_topics.id ) ), 1 ) AS gpa
+  SELECT groups.name AS groups, student_notes.student_id, students.name AS student_name, students.surname AS student_surname, subjects.name AS subject_name, ROUND( SUM( student_notes.note ) / ( COUNT( subject_topics.id ) ), 1 ) AS gpa
   FROM student_notes
   INNER JOIN subject_topics ON subject_topics.id = student_notes.topic_id
   INNER JOIN subjects ON subjects.id = subject_topics.subject_id
