@@ -35,8 +35,8 @@ CREATE TABLE subjects (
   coordinator_id INT,
 
   PRIMARY KEY( id ),
-  FOREIGN KEY( grade_id ) REFERENCES grades( id ),
-  FOREIGN KEY( coordinator_id ) REFERENCES teachers( id )
+  FOREIGN KEY( grade_id ) REFERENCES grades( id ) ON DELETE CASCADE,
+  FOREIGN KEY( coordinator_id ) REFERENCES teachers( id ) ON DELETE SET NULL
 );
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE subject_topics (
 
   PRIMARY KEY( id ),
   CONSTRAINT subject_topics UNIQUE( subject_id, topic_number ),
-  FOREIGN KEY( subject_id ) REFERENCES subjects( id )
+  FOREIGN KEY( subject_id ) REFERENCES subjects( id ) ON DELETE CASCADE
 );
 
 --
@@ -66,8 +66,8 @@ CREATE TABLE groups (
 
   PRIMARY KEY( id ),
   CONSTRAINT groups UNIQUE( name, grade_id, school_day ),
-  FOREIGN KEY( grade_id ) REFERENCES grades( id ),
-  FOREIGN KEY( director_id ) REFERENCES teachers( id )
+  FOREIGN KEY( grade_id ) REFERENCES grades( id ) ON DELETE CASCADE,
+  FOREIGN KEY( director_id ) REFERENCES teachers( id ) ON DELETE SET NULL
 );
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE students (
 
   PRIMARY KEY( id ),
   UNIQUE( identity_card ),
-  FOREIGN KEY( group_id ) REFERENCES groups( id )
+  FOREIGN KEY( group_id ) REFERENCES groups( id ) ON DELETE SET NULL
 );
 
 --
@@ -98,10 +98,10 @@ CREATE TABLE subject_groups (
 
   PRIMARY KEY( id ),
   UNIQUE( subject_id, group_id ),
-  FOREIGN KEY( group_id ) REFERENCES groups( id ),
-  FOREIGN KEY( subject_id ) REFERENCES subjects( id ),
-  FOREIGN KEY( teacher_id ) REFERENCES teachers( id ),
-  FOREIGN KEY( monitor_id ) REFERENCES students( id )
+  FOREIGN KEY( group_id ) REFERENCES groups( id ) ON DELETE CASCADE,
+  FOREIGN KEY( subject_id ) REFERENCES subjects( id ) ON DELETE CASCADE,
+  FOREIGN KEY( teacher_id ) REFERENCES teachers( id ) ON DELETE SET NULL,
+  FOREIGN KEY( monitor_id ) REFERENCES students( id ) ON DELETE SET NULL
 );
 
 SET foreign_key_checks = 1;
@@ -117,8 +117,8 @@ CREATE TABLE student_notes (
 
   PRIMARY KEY( id ),
   CONSTRAINT student_topic UNIQUE( topic_id, student_id ),
-  FOREIGN KEY( student_id ) REFERENCES students( id ),
-  FOREIGN KEY( topic_id ) REFERENCES subject_topics( id )
+  FOREIGN KEY( student_id ) REFERENCES students( id ) ON DELETE CASCADE,
+  FOREIGN KEY( topic_id ) REFERENCES subject_topics( id ) ON DELETE CASCADE
 );
 
 --
