@@ -123,3 +123,19 @@ INNER JOIN students ON student_notes.student_id = students.id
 INNER JOIN subject_topics ON student_notes.topic_id = subject_topics.id
 INNER JOIN subjects ON subject_topics.subject_id = subjects.id
 WHERE subject_topics.id = @topic_id;
+
+
+\! echo "Find the gpa obtained by a student in every subject (Student ID = 1)"
+SET @student_id = 1;
+SELECT *
+FROM student_grade_point_average
+WHERE student_id = @student_id;
+
+
+\! echo "Find the students with gpa equal or greater than 3.0 in Calculus in the group 11A-A"
+SET @gpa = 3.0;
+SET @subject_name = "Calculus";
+SET @groups = "11A-A";
+SELECT *
+FROM student_grade_point_average
+WHERE gpa >= @gpa AND subject_name = @subject_name AND groups = @groups;
