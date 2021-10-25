@@ -120,3 +120,14 @@ CREATE TABLE student_notes (
   FOREIGN KEY( student_id ) REFERENCES students( id ),
   FOREIGN KEY( topic_id ) REFERENCES subject_topics( id )
 );
+
+--
+-- Student_grade_point_average view
+CREATE OR REPLACE VIEW student_grade_point_average AS
+  SELECT groups.name AS groups, student_notes.student_id, students.name, students.surname, subjects.name AS subject_name, ROUND( SUM( note ) / ( COUNT( subject_topics.id ) ), 1 ) AS gpa
+  FROM student_notes
+  INNER JOIN subject_topics ON subject_topics.id = student_notes.topic_id
+  INNER JOIN subjects ON subjects.id = subject_topics.subject_id
+  INNER JOIN students ON students.id = student_notes.student_id
+  INNER JOIN groups ON groups.id = students.group_id
+  GROUP BY subject_topics.subject_id, student_id;

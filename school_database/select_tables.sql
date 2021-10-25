@@ -16,3 +16,5 @@ SELECT * FROM students;
 SELECT * FROM subject_groups;
 \! echo "Student_notes"
 SELECT * FROM student_notes;
+\! echo "Student_grade_point_average"
+SELECT * FROM student_grade_point_average;
